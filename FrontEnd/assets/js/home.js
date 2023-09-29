@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const galleryContainer = document.querySelector('.gallery');
-  let worksData = []; // Pour stocker la liste complète des travaux
+  let worksData = [];
   let modal = null;
 
   const openModal = function (e) {
@@ -53,36 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   const buttonAddWorks = document.querySelector('.button-add');
   const addWorkForm = document.getElementById('addWorkForm');
-  addWorkForm.addEventListener('submit', (e) => {
-    e.preventDefault();
 
-    // Récupérez les valeurs des champs du formulaire
-    const workImage = document.getElementById('workImage').files[0];
-    const workTitle = document.getElementById('workTitle').value;
-    const workCategory = document.getElementById('workCategory').value;
-
-    // Créez un objet FormData pour envoyer les données, y compris le fichier
-    const formData = new FormData();
-    formData.append('image', workImage);
-    formData.append('title', workTitle);
-    formData.append('categoryId', workCategory);
-
-    // Utilisez fetch pour envoyer une requête POST à l'API
-    fetch('http://localhost:5678/api/works', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`, // Assurez-vous d'avoir un token valide
-      },
-      body: formData,
-    })
-      .then(response => response.json())
-      .then(newWork => {
-        // Gérez la réponse de l'API après la création du travail
-        console.log('Nouveau travail créé :', newWork);
-        // Vous pouvez également réinitialiser le formulaire ou effectuer d'autres actions ici
-      })
-      .catch(error => console.error('Erreur lors de l\'ajout d\'un projet :', error));
-  });
   buttonAddWorks.addEventListener('click', () => {
     const modalGallery = document.querySelector('.modal-gallery');
     const modalAddWorks = document.querySelector('.modal-add-works');
