@@ -134,7 +134,7 @@ nav li:focus {
 	margin-bottom: 1em;
 }
 .filter-buttons {
-	display: flex;
+	display: none;
 	justify-content: center;
 	height: 37px;
 	gap: 10px;
@@ -292,13 +292,23 @@ footer nav ul {
 	padding-top: 15px;
 	padding-bottom: 46px;
 }
+.modal-buttons {
+	display:flex;
+	justify-content: space-around;
+}
 .js-modal-close {
 	border: none;
-	margin-left: 105%;
 	background-color: transparent;
 	cursor: pointer;
+	margin-left: 105%;
 }
-.js-modal-close:hover {
+.js-modal-back {
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+	display:none;
+}
+.js-modal-close:hover, .js-modal-back:hover {
 	background-color: transparent;
 	color:#B1663C;
 }
@@ -333,17 +343,22 @@ footer nav ul {
 	border-radius: 2px;
 	cursor: pointer;
 }
-.button-add {
+.button-add, .button-add-2 {
 	display: flex;
 	justify-content: center;
 	border-top: solid 1px #B3B3B3;
 	padding-top:38px;
 }
-.button-add-works {
+.button-add-works, .button-valid-works {
 	background-color: #1D6154;
 	color: #FFFEF8;
 	padding: 10px 49px;
 }
 .modal-add-works {
 	display: none;
+}
+.addWorksContainer {
+	background: #E8F1F6;
+	height: 169px;
+
 }

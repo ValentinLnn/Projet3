@@ -44,7 +44,10 @@
 		<h2 class="gallery-title">Mes Projets</h2>
 		<aside id="modalworks" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none">
 			<div class="modal-wrapper js-modal-stop">
-				<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
+				<div class="modal-buttons">
+					<button class="js-modal-back"><bu<i class="fa-solid fa-arrow-left"></i></button>
+					<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
+				</div>
 				<div class="modal-gallery">
 					<h3 id="title-modal">Galerie photo</h3>
 					<div class="modal-works"></div>
@@ -55,21 +58,24 @@
 				<div class="modal-add-works">
 					<h3 id="title-modal-2">Ajout Photo</h3>
 					<form id="addWorkForm">
-					  <label for="workImage">Image :</label>
-					  <input type="file" id="workImage" name="workImage" accept="image/*" required>
-					  
-					  <label for="workTitle">Titre :</label>
-					  <input type="text" id="workTitle" name="workTitle" required>
-					  
-					  <label for="workCategory">Catégorie :</label>
-					  <select id="workCategory" name="workCategory" required>
-					  </select>
-					  
-					  <button type="submit">Valider</button>
+						<div class="AddWorksContainer">
+						<label for="workImage">Image</label>
+						<input type="file" id="workImage" name="workImage" accept="image/*" required>
+						</div>
+						<label for="workTitle">Titre</label>
+						<input type="text" id="workTitle" name="workTitle" required>
+
+						<label for="workCategory">Catégorie</label>
+						<select id="workCategory" name="workCategory" required>
+						</select>
+						<div class="button-add-2">
+							<button type="submit" class="button-valid-works">Valider</button>
+						</div>
 					</form>
 				</div> 
 			</div>
 		</aside>
+		<div class="filter-buttons"></div>
 		<div class="gallery">
 		</div>
 	</section>
