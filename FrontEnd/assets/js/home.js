@@ -274,4 +274,10 @@ if (token) {
       })
       .catch(error => console.error('Erreur lors de l\'ajout du work :', error));
   });
+  const uploadImageButton = document.getElementById('uploadImageButton');
+
+  const workImageInput = document.getElementById('workImage');
+  uploadImageButton.addEventListener('click', () => {
+      workImageInput.click(); 
+  });
 });
