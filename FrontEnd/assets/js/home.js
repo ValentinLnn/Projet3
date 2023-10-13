@@ -1,8 +1,11 @@
+
+
 document.addEventListener('DOMContentLoaded', () => {
   const buttonAddWorks = document.querySelector('.button-add');
   const galleryContainer = document.querySelector('.gallery');
   const addWorkForm = document.getElementById('addWorkForm');
   const filterButtonsContainer = document.querySelector('.filter-buttons');
+  const buttonValidWorks = document.querySelector('.button-valid-works');
   let worksData = [];
   let modal = null;
   const modalGallery = document.querySelector('.modal-gallery');
@@ -14,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modalAddWorks.style.display = 'block';
     backModalArrow.style.display = 'block';
   });
+
   const openModal = function (e) {
     if(e){
 
@@ -243,8 +247,29 @@ if (token) {
   window.location.href = 'login.html';
 });
   const workCategorySelect = document.getElementById('workCategory');
+  const uploadImageButton = document.getElementById('uploadImageButton');
+  const workImageInput = document.getElementById('workImage');
+  const imagePreview = document.getElementById('imagePreview');
+  const workImageContainer = document.querySelector('.icon-works-limit');
+  const workTitleInput = document.getElementById('workTitle');
+
+  const checkFormValidity = () => {
+    if (workImageInput.files.length > 0 && addWorkForm.checkValidity()) {
+      buttonValidWorks.disabled = false;
+    } else {
+      buttonValidWorks.disabled = true;
+    }
+  };
+
+  workImageInput.addEventListener('input', checkFormValidity);
+  workTitleInput.addEventListener('input', checkFormValidity);
+
   addWorkForm.addEventListener('submit', (e) => {
     e.preventDefault(); 
+
+    if (workImageInput.files.length === 0) {
+      return;
+    }
 
 
     const workImage = document.getElementById('workImage').files[0];
@@ -252,32 +277,59 @@ if (token) {
     const workCategory = workCategorySelect.value;
 
 
-    const newWork = {
-      title: workTitle,
-      imageUrl: workImage, 
-      categoryId: workCategory,
-      userId: 1,
-    };
+    const formData = new FormData();
+
+    formData.append('image', workImage);
+    formData.append('title', workTitle);
+    formData.append('category', workCategory);
+
 
     fetch('http://localhost:5678/api/works', {
       method: 'POST',
-      body: JSON.stringify(newWork),
+      body: formData,
       headers: {
-        'Authorization': `Bearer ${token}`, 
-        'Content-Type': 'application/json', 
+        'Authorization': `Bearer ${token}`
       },
     })
       .then(response => response.json())
       .then(createdWork => {
         console.log('Work ajouté avec succès :', createdWork);
+        worksData.push(createdWork);
+        displayAllWorks();
+        openModal();
         addWorkForm.reset();
+        buttonValidWorks.disabled = true;
+        imagePreview.style.display = 'none';
+        workImageContainer.style.display = 'flex';
+        workImageInput.value = '';
       })
       .catch(error => console.error('Erreur lors de l\'ajout du work :', error));
   });
-  const uploadImageButton = document.getElementById('uploadImageButton');
+  workImageInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
 
-  const workImageInput = document.getElementById('workImage');
+      const reader = new FileReader();
+      reader.onload = function () {
+        imagePreview.src = reader.result;
+        imagePreview.style.display = 'flex';
+        workImageContainer.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    } else {
+      
+      imagePreview.style.display = 'none';
+      workImageContainer.style.display = 'flex';
+    }
+  });
+  imagePreview.addEventListener('click', () => {
+    workImageInput.value = null;
+    imagePreview.style.display = 'none';
+    workImageContainer.style.display = 'flex';
+  })
+
   uploadImageButton.addEventListener('click', () => {
       workImageInput.click(); 
   });
+
 });

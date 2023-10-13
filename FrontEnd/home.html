@@ -59,18 +59,24 @@
 					<h3 id="title-modal-2">Ajout Photo</h3>
 					<form id="addWorkForm">
 						<div class="addWorksContainer">
-						<label for="workImage"></label>
-						<input type="file" id="workImage" name="workImage" accept="image/*">
-						<button type="button" id="uploadImageButton">+ Ajouter photo</button>
+							<div class="icon-works-limit">
+								<i class="fa-regular fa-image fa-5x"></i>
+								<label>
+									<input type="file" id="workImage" name="image" accept="image/*">
+									<button type="button" id="uploadImageButton">+ Ajouter photo</button>
+								</label>
+								<sub> jpg, png : 4mo max</sub>
+							</div>
+							<img id="imagePreview" src="" alt="Prévisualisation de l'image" style="display: none;">
 						</div>
 						<label for="workTitle">Titre</label>
 						<input type="text" id="workTitle" name="workTitle" required>
 
 						<label for="workCategory">Catégorie</label>
-						<select id="workCategory" name="workCategory" required>
+						<select id="workCategory" name="category" required>
 						</select>
 						<div class="button-add-2">
-							<button type="submit" class="button-valid-works">Valider</button>
+							<button type="submit" class="button-valid-works" disabled>Valider</button>
 						</div>
 					</form>
 				</div> 
