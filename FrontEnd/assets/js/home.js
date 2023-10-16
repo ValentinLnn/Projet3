@@ -102,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch('http://localhost:5678/api/categories')
   .then(response => response.json())
   .then(categories => {
-    console.log('Catégories récupérées :', categories);
     const filterButtonsContainer = document.querySelector(".filter-buttons");
 
     const allButton = document.createElement('button');
@@ -195,8 +194,6 @@ if (token) {
   logoutLink.style.display = 'block';
   loginLink.style.display = 'none';
 
-  console.log(token);
-
   const editMod = document.createElement('div')
   editMod.classList.add('editor-mod');
 
@@ -235,7 +232,6 @@ if (token) {
 
 } else {
   logoutLink.style.display = 'none';
-  console.log(token);
   filterButtonsContainer.style.display = 'flex';
 
 }
@@ -293,7 +289,7 @@ if (token) {
     })
       .then(response => response.json())
       .then(createdWork => {
-        console.log('Work ajouté avec succès :', createdWork);
+
         worksData.push(createdWork);
         displayAllWorks();
         openModal();
